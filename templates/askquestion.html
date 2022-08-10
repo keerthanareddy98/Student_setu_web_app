@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}
+	Register
+{% endblock %}
+
+{% block main %}
+
+
+    <body>  
+<br>
+<br>
+  <form action="/askquestion" method ="POST">
+    <center><div class="container1">  
+    <h1> Ask a Question ?</h1>  
+  <hr>    
+
+<label> <b>What is your Question ?</b></label> <br>
+<textarea cols="80" rows="5" name="qns" placeholder="Enter your Question here" value="address" required></textarea>  
+<div style="text-align: left;">
+  
+  <h4> Do you wish to be anonymous</h4>
+  <input type="radio" value="yes" name="anonymous"  > yes   
+  <input type="radio" value="no" name="anonymous" checked> no
+  <br> 
+  <br>
+  <input type="checkbox" value="notify" name="notify"  > Receive notification in case of reply.<br>     
+</div>
+  <center><button type="submit" class="submitbtn">SUBMIT</button> </center>
+  
+</div> 
+</center>   
+</form> 
+</body>  
+{% endblock %}

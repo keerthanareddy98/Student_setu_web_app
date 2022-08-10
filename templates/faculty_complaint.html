@@ -1,0 +1,217 @@
+{% extends "layout.html" %}
+{% block title %}
+	Register
+{% endblock %}
+{% block main %}
+    <body>  
+		<style>
+			body {
+	font-family: 'Montserrat', sans-serif;
+	height: 100vh;
+}
+h3 {
+	text-align: center;
+	color: #413b3b;
+	text-transform: uppercase;
+	font-size: 80px;
+	font-family: 'Zen Tokyo Zoo', cursive;
+}
+h5 {
+	text-align: center;
+	color: #82807f;
+	margin: 80px auto;
+	font-size: 20px;
+	width: 50%;
+	line-height: 1.7;
+}
+.box {
+	text-align: center;
+}
+.button {
+	font-size: 1em;
+	padding: 15px 35px;
+	color: #fff;
+	text-decoration: none;
+	cursor: pointer;
+	transition: all 0.3s ease-out;
+	background: #403e3d;
+	border-radius: 50px;
+}
+.overlay1 {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: rgba(0, 0, 0, 0.8);
+	transition: opacity 500ms;
+	visibility: hidden;
+	opacity: 0;
+}
+.overlay1:target {
+	visibility: visible;
+	opacity: 1;
+}
+.wrapper1 {
+	margin: 70px auto;
+	padding: 20px;
+	background: #e7e7e7;
+	border-radius: 5px;
+	width: 30%;
+	position: relative;
+	transition: all 5s ease-in-out;
+}
+.wrapper1 h2 {
+	margin-top: 0;
+	color: #333;
+}
+.wrapper1 .close1 {
+	position: absolute;
+	top: 20px;
+	right: 30px;
+	transition: all 200ms;
+	font-size: 30px;
+	font-weight: bold;
+	text-decoration: none;
+	color: #333;
+}
+.wrapper1 .close1:hover {
+	color: #06D85F;
+}
+.wrapper1 .content1 {
+	max-height: 30%;
+	overflow: auto;
+}
+/*form*/
+
+.container1 {
+	border-radius: 5px;
+	background-color: #e7e7e7;
+	padding: 20px 0;
+}
+form label {
+	text-transform: uppercase;
+	font-weight: 500;
+	letter-spacing: 3px;
+}
+input[type=text], select, textarea {
+	width: 100%;
+	padding: 12px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+	margin-top: 6px;
+	margin-bottom: 16px;
+	resize: vertical;
+}
+input[type="submit"] {
+	background-color: #413b3b;
+	color: #fff;
+	padding: 15px 50px;
+	border: none;
+	border-radius: 50px;
+	cursor: pointer;
+	font-size: 15px;
+	text-transform: uppercase;
+	letter-spacing: 3px;
+}
+
+		</style>
+      <div>
+        <!-- <form action="/faculty_idea" method ="POST"> -->
+			<div>  
+				<center>  <h1>List of Complaints</h1> 
+				  <hr>  
+				  <h6 style="display:inline-block"> <a href="latestc" class="btn btn-light btn-block" type="submit" width="15px">Latest</a></h6>
+				  <h6 style="display:inline-block"><a href="viewedc" class="btn btn-dark btn-block" type="submit" width="15px">Viewed</a></h6>
+			  <br>
+			  <br>    
+				</center>
+		</div>
+		<center>
+			<div>
+			{% if session.latest %}
+			<div>
+				{% for record in records %}
+				<div class="card">
+							<table>
+								<td><b>Studentid:</b> {{record[1]}}</td>
+								
+								<td><b>Name:</b> {{record[2]}}</td>
+								
+								<td><b>Department:</b> {{record[3]}}</td>
+							</table>
+							<b>{{record[5]}}</b>			
+			
+							<!-- <h6 style="display:inline-block;"> <a href="x" class="btn btn-success btn-block" type="submit" width="15px">Reply</a></h6><strong><span><h6 style="display:inline-block"><a href="ignore" class="btn btn-danger btn-block" type="submit" width="15px">Ignore</a></h6></span></strong> -->
+							<div width="100%">
+								<a href="#divone" id="button" class="btn btn-success btn-xs"  width="15px" > Reply</a>
+								<a href="ignore/{{record[0]}}" class="btn btn-danger btn-xs"  width="15px" onclick="return confirm('Are You Sure For Ignore?')">Ignore</a>
+							</div>
+							<p style="text-align: left;">{{record[9]}}</p>
+							<div class="overlay1" id="divone" >
+								<div class="wrapper1">
+									<h2>Send your reply</h2><a class="close1" href="#">&times;</a>
+									<div class="content1">
+										<div class="container1">
+											<form action="/replysent/{{record[1]}}/{{record[0]}}" method ="POST">
+											<textarea cols="50" rows="5" name="answer" placeholder="Enter your Reply here" required></textarea>
+											<input type="submit" class="button" value="Send"/>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+			
+						</div>
+			
+				{% endfor %}
+			</div>
+			{% elif session.viewed %}
+			<div>
+				{% for record in records %}
+				<div class="card">
+							<table>
+								<td><b>Studentsid:</b> {{record[1]}}</td>
+								
+								<td><b>Name:</b> {{record[2]}}</td>
+								
+								<td><b>Department:</b> {{record[3]}}</td>
+							</table>
+							<b style="text-align: left;">Complaint:</b>
+							<p style="text-align: left;">{{record[5][0]}}</p>
+							<b>{{record[5][2]}}</b>
+			
+			
+							<!-- <h6 style="display:inline-block;"> <a href="x" class="btn btn-success btn-block" type="submit" width="15px">Reply</a></h6><strong><span><h6 style="display:inline-block"><a href="ignore" class="btn btn-danger btn-block" type="submit" width="15px">Ignore</a></h6></span></strong> -->
+							<div width="100%">
+								<a href="#divone" id="button" class="btn btn-warning btn-xs"  width="15px" > Edit</a>
+								<a href="ignore/{{record[0]}}" class="btn btn-danger btn-xs"  width="15px" onclick="return confirm('Are You Sure For Ignore?')">Delete</a>
+							</div>
+							<p style="text-align: left;">{{record[9]}}</p>
+							<div class="overlay1" id="divone" >
+								<div class="wrapper1">
+									<h2>Send your reply</h2><a class="close1" href="#">&times;</a>
+									<div class="content1">
+										<div class="container1">
+											<form action="/replysent/{{record[1]}}/{{record[0]}}" method ="POST">
+											<textarea cols="50" rows="5" name="answer" placeholder="Enter your Reply here" required></textarea>
+											<input type="submit" class="button" value="Send"/>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+			
+						</div>
+			
+				{% endfor %}
+			</div>
+			{% else %}
+			{% endif %}
+			</div>
+			</center>
+		</div> 
+
+	</body>  
+	{% endblock %}

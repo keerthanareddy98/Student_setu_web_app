@@ -1,0 +1,148 @@
+{% extends "layout.html" %}
+{% block title %}
+	Login
+{% endblock %}
+{% block main %} 
+    <!-- <body>  
+      <form action="/login" method ="POST">
+        <br>
+        <br>
+  <center>
+  <div class="container1">  
+  <center>  <h1> Login Form</h1> </center>  
+  <hr> 
+
+    <select name="user" class="slct" required>
+      <option value="" disabled selected >User</option><option value="Student">Student</option> <option value="Faculty">Faculty</option>  
+    </select>
+  <br>
+  <br>
+ <input type="text" placeholder="Enter User ID" name="useridno" required autofocus>
+ <br>
+ <input type="password" placeholder="Enter Password" name="password" required>
+ <br>
+ <p style="text-align: right;"> 
+   <a href="forgotpage"  >FORGOT PASSWORD</a><br><br>
+  </p>
+   <button type="submit" class="submitbtn">LOGIN</button> 
+   New user? 
+   <a href="register">REGISTER</a><br><br>
+</div>
+</center>     
+</form>
+</body> -->
+ 
+<body>
+    <style>
+
+      body {
+        font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 15px;
+      }
+      
+      .header {
+          font-family: "Candara";
+          font-size: larger;
+          color: #1b7a8a;
+          padding: 0.5%;
+      }
+      
+      form {
+          width: 450px;
+          background-color: white;
+          border: 1px solid #e5e5e5;
+          border-radius: 3px;
+          padding: 10px;
+          box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
+      }
+      
+      form h2 {
+          font-family:  Georgia, Serif;
+      }
+      
+      form input[type="text"],
+      form input[type="password"] {
+          width: 90%;
+          padding: 1em;
+          background-color: #f9f9f9;
+          border: 1px solid #e5e5e5;
+          border-radius: 3px;
+      }
+      
+      .slct {
+          
+      width: 95%;
+          padding: 1em;
+          background-color: #f9f9f9;
+          border: 1px solid #e5e5e5;
+          border-radius: 3px;
+      }
+      
+      button[type="submit"] {
+          width: 50%;
+          padding: 10px;
+          border: 3px solid #1b7a8a; 
+          background-color: #f9f9f9;
+          color: #1b7a8a; 
+          border-radius: 10px;
+          font-size: medium;
+      }
+      
+      button[type="submit"]:hover{
+          width: 50%;
+          padding: 10px;
+          background-color: #1b7a8a; 
+          color: white;
+          border-radius: 10px;
+          font-size: medium;
+      }
+      
+      .lnk {
+          text-align: right;
+      }
+      
+      
+      </style>
+
+      <center>
+          <div>
+              <div>
+                  <form action = "/login" method="POST">
+                      <h2>Log in to Application </h2>
+                      <div>
+                          <div>
+                              <select class="slct" name="user" required>
+                                  <option value="" disabled selected>Select User Type</option>
+                                  <option value="Student">Student</option>
+                                  <option value="Faculty">Faculty</option>
+                              </select>
+                          </div><br>
+  
+                          <input type="text" name="useridno" id="useridno"  placeholder= "User ID" required /><br><br>
+  
+                          <input 
+                           type="password" 
+                           placeholder="Password" 
+                           name="password" 
+                           onmouseenter="this.type='text'"
+                           onmouseleave="this.type='password'"
+                           required
+                          > <br>
+  
+                      </div>
+  
+                      <p class="lnk"> <a href="forgotpage">Forgot Password? </a></p> <br><br>
+  
+                      <button type="submit" class="submitbtn">Login</button><br><br>
+  
+                      <a href="register">New User? Sign up</a> <br><br>
+                  
+                  </form>
+              </div> 
+              <br>
+  
+          </div>
+      </center>
+      
+  </body>
+{% endblock %}

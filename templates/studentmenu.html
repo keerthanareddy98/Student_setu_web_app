@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}
+	Register
+{% endblock %}
+
+{% block main %} 
+<body>  
+    <div>  
+    <center>  <h1> Student Main Menu</h1>  </center>
+      <hr>    
+      <div class="flex-container">
+    <a href="askquestion"> 
+      <div><img src="static/qns.jpg" alt="Ask a Question" width="100" height="100" align="left">
+        <strong>Ask a Question</strong> 
+      </div></a>
+  <a href="complaint">
+    <div><img src="static/complaint.jpg" alt="Give a complaint" width="100" height="100" align="left">
+    <strong>Give a complaint</strong>
+  </div>
+</a>
+ <a href="idea">
+  <div> <img src="static/idea.jpg" alt="Propose an Idea" width="100" height="100" align="left">
+    <strong>Propose an Idea</strong>
+  </div>  
+</a>
+  </div> 
+    </div>
+</body>  
+{% endblock %}

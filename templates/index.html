@@ -1,0 +1,89 @@
+{% extends "layout.html" %}
+{% block title %}
+index
+{% endblock %}
+{% block main %}
+{% if session.student %}
+<body>  
+  <form action = "/register" method="POST">
+    <div>  
+    <center>  <h1> Student Main Menu</h1>  </center>
+      <hr>    
+      <div class="flex-container">
+
+    <a href="askquestion"> 
+      <div><img src="static/qns.jpg" alt="Ask a Question" width="100" height="100" align="left">
+        <strong>Ask a Question</strong> 
+      </div></a>
+  <a href="complaint">
+    <div><img src="static/complaint.jpg" alt="Give a complaint" width="100" height="100" align="left">
+    <strong>Give a complaint</strong>
+  </div>
+</a>
+ <a href="idea">
+  <div> <img src="static/idea.jpg" alt="Propose an Idea" width="100" height="100" align="left">
+    <strong>Propose an Idea</strong>
+  </div>  
+</a>
+  </div> 
+    </div>
+</form>
+<!-- </body>   -->
+{% elif session.faculty %}
+<!-- <body>   -->
+  <div >  
+    <center>  <h1> Faculty Main Menu</h1> </center>  
+    <hr>
+<div class="flex-container">
+
+    <a href="faculty_question"> 
+      <div><img src="static/qns.jpg" alt="Ask a Question" width="100" height="100" align="left"> 
+    <strong>Questions</strong> 
+  </div>
+</a>
+ <a href="faculty_complaint">
+  <div> <img src="static/complaint.jpg" alt="Complaint" width="100" height="100"align="left">
+    <strong>Complaints</strong>
+  </div>
+</a>
+  <a href="faculty_idea">
+    <div> <img src="static/idea.jpg" alt="idea" width="100" height="100" align="left">
+      <strong>Ideas</strong>
+    </div>  
+  </a>
+</div>
+  </div> 
+
+<!-- </body>  -->
+{% else %}
+  <!-- <body> -->
+    
+<div class="home" align=center>
+ <font face="Comic sans MS" >
+              <h3>Communication made simple</h3>
+              <h6 >
+			   <font  face="Comic sans MS" >
+                It's always hard to directly interact with your higher authorities, therefore here comes the easy way
+              </font>
+			  </h6>
+              <div >
+                <div >
+             
+                  <h4 >Give Complaints</h4>
+                  <h6>
+				  <font  face="Comic sans MS" >
+				  Tell them what issues you have</font></h6>
+                </div>
+                 <div>
+                  <h4>Propose ideas</h4>
+                  <h6><font  face="Comic sans MS" >Bring out the smartness in you, they'll help you</font></h6>
+                </div>
+                <div >
+                  <h4 >Pose Questions</h4>
+                  <h6><font  face="Comic sans MS" >Ask anything</font></h6>
+                </div>
+				</font>
+            </div>
+{% endif %}
+  </body>
+{% endblock %}

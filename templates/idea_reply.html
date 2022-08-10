@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}
+	ideas
+{% endblock %}
+
+{% block main %}
+
+<body>
+<div class="mycontainer">
+ <a href="#" class="button" id="button">Click to Reply</a>
+</div>
+<div  class="popup">
+   <div class="popup-content">
+    <div class="callout" data-closable>
+        <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+          <span aria-hidden="true">&times;</span>
+        </button>
+    <!-- <img src="close.jpg" alt="Close" class="'close">
+      -->
+   
+    <h5> Send your reply</h5>
+    
+    <form action="/replysent" method ="POST">
+    <textarea cols="50" rows="5" name="answer" placeholder="Enter your Reply here" required></textarea>
+    <input type="submit" class="button" value="Send"/>
+    </form>
+    </div>
+    
+   </div>
+</div>
+<script>
+ document.getElementById("button").addEventListener("click", function(){
+       document.querySelector(".popup").style.display = "flex";});
+ document.getElementById("close-button").addEventListener("click", function(){
+       document.querySelector(".popup").style.display="none";});
+</script>
+</body>
+{% endblock %}

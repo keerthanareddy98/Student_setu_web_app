@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}
+	Register
+{% endblock %}
+
+{% block main %}
+<head>  
+<meta name="viewport" content="width=device-width, initial-scale=1">  
+
+</head>  
+    <body>  
+  <form action="/changepwd" method ="POST">
+  <div class="container">  
+
+<center>  <h1>Reset Your Password</h1> </center>  
+<hr>  <br> <br> 
+
+<label for="newPassword">New Password:</label>
+<input type="password" id="newPassword" name="newpassword" required />
+
+<label for="confirmPassword">Confirm Password:</label>
+<input type="password" id="confirmPassword" name="confirmpassword" required/>
+
+<center><button type="submit" class="btn btn-success">SUBMIT</button> </center>
+
+</div>     
+</form>  
+</body>  
+{% endblock %}

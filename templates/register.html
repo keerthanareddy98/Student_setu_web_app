@@ -1,0 +1,230 @@
+{% extends "layout.html" %}
+
+{% block title %}
+	Register
+{% endblock %}
+
+{% block main %}
+<!-- <body>  
+  <form action = "/register" method="POST">
+      <div class="container">  
+  <center><h1>Registration Form</h1> </center>  
+  <hr>  
+  <h6 style="display:inline-block;"><b> User: &nbsp &nbsp</b> </h6> <strong><span><h6 style="display:inline-block; color:white"><select name="user"><option value="Student">Student</option> <option value="Faculty">Faculty</option>  </select> </h6></span></strong>
+
+     <br>
+<label><b> Name: </b></label>   
+<input type="text" name="name" id="name"  placeholder= "Enter your name" size="15" required autofocus/>  
+<label><b> ID: </b></label>    
+<input type="text" name="useridno" id="useridno"  placeholder= "Enter your Roll no" size="15" required /> 
+<label><b> Email: </b></label>     
+<input type="text" name="email" id="email"  placeholder= "Enter your email" size="15" required />    
+<label><b> Phone: </b></label>  
+<input type="text" name="phone" id="phone"  placeholder= "Enter your phone number" size="15" required />     
+
+<div>  
+  <label><b> Department: </b></label>   
+    
+  <select name="dept">  
+  <option value="dept">Department</option>  
+  <option value="CSE">CSE</option>  
+  <option value="ECE">ECE</option>  
+  <option value="EEE">EEE</option>  
+  <option value="MECH">MECH</option>  
+  <option value="CIVIL">CIVIL</option>  
+  <option value="AI/ML">AI/ML</option>  
+</select>  
+  </div> 
+  
+  <div>  
+    <label><b> Gender: </b></label>   
+      
+    <select name="gender">  
+      <option value="gender">Gender</option>
+    <option value="Male">Male</option>  
+    <option value="Female">Female</option>  
+    <option value="Other">Other</option>    
+    </select>  
+    </div> 
+
+    <label for="password"><b>Password</b></label>  
+    <input type="password" placeholder="Enter Password" name="password" required>  
+    
+    <label> <b>Confirm Password</b></label>  
+    <input type="password" placeholder="Confirm Password" name="confirmpassword" required>  
+    <button type="submit" class="submitbtn">Register</button>    
+</form>  
+</body> -->
+
+<body>
+  <style>
+
+    body {
+      font-family: "Candara, Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 15px;
+    }
+    
+    .header {
+        font-family: "Candara";
+        font-size: larger;
+        color: #1b7a8a;
+        padding: 0.5%;
+    }
+    
+    form {
+        width: 550px;
+        background-color: white;
+        border: 1px solid #e5e5e5;
+        border-radius: 3px;
+        padding: 10px;
+        box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
+    }
+    
+    form h2 {
+        font-family:  Georgia, Serif;
+    }
+    
+    form input[type="text"],
+    form input[type="password"] {
+        width: 90%;
+        padding: 1em;
+        background-color: #f9f9f9;
+        border: 1px solid #e5e5e5;
+        border-radius: 3px;
+    }
+    
+    .slct {
+        width: 47%;
+        padding: 1em;
+        background-color: #f9f9f9;
+        border: 1px solid #e5e5e5;
+        border-radius: 3px;
+    }
+    
+    .rdo{
+      display: inline-flex;
+      width: 90%;
+      height: 40px;
+      align-items: center;
+      justify-content: space-evenly;
+      border-radius: 5px;
+      padding: 1em;
+      background-color: #f9f9f9;
+      border: 1px solid #e5e5e5;
+    }
+    
+    .rdo div {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      margin: 0 10px;
+      justify-content: space-evenly;
+      border-radius: 5px;
+      padding: 0 10px;
+      background-color: white;
+    }
+    
+    button[type="submit"] {
+        width: 50%;
+        padding: 10px;
+        border: 3px solid #1b7a8a; 
+        background-color: #f9f9f9;
+        color: #1b7a8a; 
+        border-radius: 10px;
+        font-size: medium;
+    }
+    
+    button[type="submit"]:hover{
+        width: 50%;
+        padding: 10px;
+        background-color: #1b7a8a; 
+        color: white;
+        border-radius: 10px;
+        font-size: medium;
+    }
+    
+    
+    </style>
+    <center>
+        <div>
+            <div>
+                <form action = "/register" method="POST">
+                    <h2>Registration Form</h2>
+                    <div>
+                        <div>
+                            <select class="slct" name="year" required>
+                                <option value="" disabled selected>Year</option>
+                                <option value="yr1">1st Year</option>
+                                <option value="yr2">2nd Year</option>
+                                <option value="yr3">3rd Year</option>
+                                <option value="yr4">4th Year</option>
+                            </select>
+                            <select class="slct" name="dept" required>
+                                <option value="" disabled selected>Department</option>
+                                <option value="CSE">CSE</option>  
+                                <option value="ECE">ECE</option>  
+                                <option value="EEE">EEE</option>  
+                                <option value="MECH">MECH</option>  
+                                <option value="CIVIL">CIVIL</option>  
+                                <option value="AI/ML">AI/ML</option>  
+                            </select>
+                        </div><br>
+
+                        <input type="text" name="useridno" id="useridno"  placeholder= "Roll Number" required /><br><br>
+
+                        <input type="text"  name="name" id="name"  placeholder= "Full Name" required/><br><br>
+                        
+                        <input type="text" name="email" id="email"  placeholder= "Email" required /><br><br>
+
+                        <input type="text" name="phone" id="phone"  placeholder= "Phone Number" required /><br><br>
+                
+                        <div class="rdo">
+                            <p> Gender </p> <br>
+                            <div>
+                                <input type="radio" name="gender" id="Male" required> 
+                                <label for="Male" class="option Male">  Male </label>
+                            </div>
+                            <div>
+                                <input type="radio" name="gender" id="Female"> 
+                                <label for="Female" class="option Female"> Female </label>
+                            </div>
+                            <div>
+                                <input type="radio" name="gender" id="Other">
+                                <label for="Other" class="option Other"> Other </label>
+                            </div>
+                        </div> <br><br>
+
+                        <input 
+                         type="password" 
+                         placeholder="Enter Password" 
+                         name="password" 
+                         onmouseenter="this.type='text'"
+                         onmouseleave="this.type='password'"
+                         required
+                        > <br><br>
+
+                        <input 
+                         type="password" 
+                         placeholder="Confirm Password" 
+                         name="confirmpassword" 
+                         onmouseenter="this.type='text'"
+                         onmouseleave="this.type='password'"
+                         required
+                        > <br><br>
+
+                    </div> <br>
+
+                    <button type="submit" class="submitbtn ">Sign Up</button><br><br>
+
+                    <a href="login">Already have an account?</a> <br><br>
+                
+                </form>
+            </div> 
+            <br>
+
+        </div>
+    </center>
+    
+</body>
+{% endblock %}

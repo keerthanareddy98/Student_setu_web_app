@@ -1,0 +1,105 @@
+{% extends "layout.html" %}
+{% block title %}
+	forgotpage
+{% endblock %}
+{% block main %}
+    <!-- <body>  
+  <form action="/sendotp" method ="POST">
+    <br>
+    <br>
+    <center> 
+      <div class="container">
+ <h1>Forgot your password ???</h1> 
+ <p style="text-align: left;"><b>Enter your Email ID:</b></p><br>
+<h6 style="display:inline-block"> <input type="text" placeholder="Enter mail ID" name="email" autofocus></h6>
+<input type="submit" class="btn btn-dark" style="display:inline-block" value="Send OTP"/>
+<br>
+<br>
+<center>
+  <h6 style="display:inline-block;"><b> OTP: &nbsp &nbsp</b></h6> 
+  <strong><span><h6 style="display:inline-block"><input type="text" style="width: 150px" id="token" name="otp" title="Password Token" />  &nbsp 
+    <p class="form-actions" style="display:inline-block">       
+<input type="submit" class="btn btn-success btn-xs" style="display:inline-block" value="verify" formaction="verify"/>
+    </p></h6></span></strong>
+  </center>
+<br>
+</div>
+</center>       
+</form>  
+</body>   -->
+
+
+  <body>
+    <style>
+
+      body {
+        padding: 1em;
+        font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 15px;
+        background-color: #e3e3e3;
+      }
+      
+      form {
+          width: 450px;
+          border: 1px solid #e5e5e5;
+          border-radius: 3px;
+          padding: 10px;
+          }
+      
+      form h2 {
+          font-family:  Georgia, Serif;
+      }
+      
+      form input[type="text"] {
+          width: 90%;
+          padding: 1em;
+          border-radius: 3px;
+      }
+      
+      form input[type="password"] {
+          width: 45%;
+          padding: 1em;
+          border-radius: 3px;
+      }
+      
+      button[type="submit"] {
+          width: 45%;
+          padding: 10px;
+          border: 3px solid #1b7a8a; 
+          color: black; 
+          border-radius: 10px;
+          font-size: medium;
+      }
+      
+      button[type="submit"]:hover{
+          width: 45%;
+          padding: 10px;
+          background-color: #1b7a8a; 
+          border-radius: 10px;
+          font-size: medium;
+      }
+      
+      </style>
+      <center>
+          <div>
+              <div>
+                  <form action = "/sendotp" method="POST">
+                      <h2>Forgot your password ??? </h2> <br>
+                      <div>
+                          <input type="text" name="email" placeholder= "Enter mail ID" required />
+                          <button type="submit">Send OTP</button><br><br>
+                      </div>
+                      <hr> <br>
+                      <div>
+                          <input type="password" id="token" name="otp" placeholder="Enter OTP" />
+                          <button type="submit" class="submitbtn" formaction="verify">Verify</button><br><br>
+                      </div>
+                      <br><br>
+                  </form>
+              </div> 
+              <br>
+          </div>
+      </center>
+  </body>
+
+{% endblock %}
