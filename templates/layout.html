@@ -23,7 +23,7 @@
 	</head>
 	<body >
 	
-		<nav class="navbar navbar-expand-md navbar-light bg-light border">
+		<nav class="navbar navbar-expand-md navbar-light bg-grey border">
 		
             <a class="navbar-brand" href="/" ><font size="6" color="red"><b>Complaint box</b></font></a>
 			
@@ -42,8 +42,8 @@
 
                 {% if session.student %}
                 <ul class="navbar-nav ml-auto mt-2">
-                    <li class="nav-item"><a class="nav-link" href="/studentview"><font style ="color:red" >  <b>Dashboard</b></font></a></li>
-                    <li class="nav-item"><a class="nav-link" href="/logout"><font style ="color:red" >  <b>Log Out</b></font></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/studentview">  <b>Dashboard</b></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/logout"> <b>Log Out</b></a></li>
                 </ul>
             
                 <br>
@@ -51,7 +51,7 @@
 
                 {% elif session.faculty %}
                 <ul class="navbar-nav ml-auto mt-2">
-                    <li class="nav-item"><a class="nav-link" href="/logout"><font style ="color:red" >  <b>Log Out</b></font></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/logout"> <b>Log Out</b></a></li>
                 </ul>
                 <br>
                 <br>
@@ -61,8 +61,8 @@
 
                 {% else %}
                     <ul class="navbar-nav ml-auto mt-2">
-                        <li class="nav-item"><a class="nav-link" href="/register"><font style ="color:white" > <b>Register</b></font></a></li>
-                        <li class="nav-item"><a class="nav-link" href="/login"><font style ="color:white" >  <b>Login</b></font></a></li>
+                        <li class="nav-item"><a class="nav-link" href="/register"><b>Register</b></a></li>
+                        <li class="nav-item"><a class="nav-link" href="/login"> <b>Login</b></a></li>
                  
                     </ul>
                     <br>
