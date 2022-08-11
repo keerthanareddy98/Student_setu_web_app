@@ -46,6 +46,8 @@ def register():
         email = request.form['email']
         phone = request.form['phone']
         dept = request.form.get('dept')
+        year=request.form['year']
+        dept+=" "+year
         gender= request.form.get('gender')
         password = request.form['password']
         confirmPassword = request.form['confirmpassword']
@@ -306,13 +308,9 @@ def ignore(dt):
     print(dt)
     flash("Record Has Been Deleted Successfully")
     cur = mysql.connection.cursor()
-    cur.execute("DELETE FROM ideas WHERE sno=%s", (dt,))
+    cur.execute("DELETE FROM ciq_details WHERE sno=%s", (dt,))
     mysql.connection.commit()
-    return redirect(url_for('faculty_idea'))
-
-
-
-
+    return redirect(url_for('facultymenu'))
 
 
 #faculty giving reply for an idea
@@ -346,17 +344,17 @@ def complaint_reply(dt,si):
     #return redirect(url_for('complaint_reply'))
 
 #faculty giving reply for a question
-@app.route('/question_reply/<string:dt>/<string:si>', methods = ['GET'])
-@login_required
-def question_reply(dt,si):
-    global replyto
-    global ideano
-    ideano=si
-    print("qns issss:",dt,si)
-    replyto=dt
-    return ""
-    # return render_template("idea_reply.html")
-    #return redirect(url_for('question_reply'))
+# @app.route('/question_reply/<string:dt>/<string:si>', methods = ['GET'])
+# @login_required
+# def question_reply(dt,si):
+#     global replyto
+#     global ideano
+#     ideano=si
+#     print("qns issss:",dt,si)
+#     replyto=dt
+#     return ""
+#     # return render_template("idea_reply.html")
+#     #return redirect(url_for('question_reply'))
 
 
 #faculty giving reply for an idea
@@ -373,7 +371,7 @@ def replysent(replyto,ideano):
         email=cur.fetchone()
         cur.execute("SELECT statement from ciq_details WHERE sno=%s",(ideano,))
         idea=cur.fetchone()
-
+        print(idea)
         n=cur.execute("SELECT notify from ciq_details WHERE sno=%s",(ideano,))
         up=cur.execute("UPDATE ciq_details SET status=%s WHERE sno=%s ", (0,ideano,))
         print("keerthana : ",session['user_id'],answer)
@@ -399,6 +397,54 @@ def replysent(replyto,ideano):
         else:
             return redirect(url_for('faculty_complaint'))
             # return render_template("faculty_complaint.html")
+
+#faculty giving reply for an idea
+@app.route('/editsentreply/<string:replyto>/<string:ideano>', methods =['GET', 'POST'])
+@login_required
+def editsentreply(replyto,ideano):
+    if request.method == 'POST' :
+        print(replyto,ideano)
+        answer= request.form["answer"]
+
+        cur = mysql.connection.cursor()
+        # cur.execute("SELECT name from details WHERE useridno=%s",(session['user_id'],))
+        # name=cur.fetchone()
+        # cur.execute("SELECT email from details WHERE useridno=%s",(replyto,))
+        # email=cur.fetchone()
+        cur.execute("SELECT statement from ciq_details WHERE sno=%s",(ideano,))
+        idea=list(cur.fetchone())
+        idea=idea[0].split("#$&$#")
+        # print(idea)
+        idea[2]=answer
+        tobeupdated='#$&$#'.join(idea)
+        # print(tobeupdated)
+        n=cur.execute("SELECT notify from ciq_details WHERE sno=%s",(ideano,))
+        up=cur.execute("UPDATE ciq_details SET status=%s WHERE sno=%s ", (0,ideano,))
+        # print(" kkkkk: ",session['user_id'],answer)
+        #tobeupdated=str([idea[0],name,answer])
+        # print(idea,name)
+        cur.execute("SELECT ciq_flag from ciq_details WHERE sno=%s",(ideano,))
+        flag=cur.fetchone()[0]
+        # print(flag)
+        # tobeupdated=idea[0]+"#$&$#"+name[0]+"#$&$#"+answer
+
+        up=cur.execute("UPDATE ciq_details SET statement=%s WHERE sno=%s ", (tobeupdated,ideano,))
+        # if n:
+        #     message="You have been received your response \n For the query: "+ idea[0] +"\n \n" + answer
+        #     sendgridmail(email,message)
+        mysql.connection.commit()
+        # print(up)
+        flash("Reply has been edited Successfully")
+        if(flag=='i'):
+            #return render_template("faculty_idea.html")
+            return redirect(url_for('faculty_idea'))
+        elif(flag=='q'):
+            return redirect(url_for('faculty_question'))
+            # return render_template("faculty_question.html")
+        else:
+            return redirect(url_for('faculty_complaint'))
+            # return render_template("faculty_complaint.html")
+
 
 #retrieving latest rows from ideas table {[...This should also be implemented for questions and complaints as well...]}
 @app.route("/latesti") 

@@ -153,12 +153,19 @@
                     <h2>Registration Form</h2>
                     <div>
                         <div>
+                            <div>
+                                <select class="slct" name="user" required onselect="event">
+                                    <option value="" disabled selected>Select User Type</option>
+                                    <option value="Student">Student</option>
+                                    <option value="Faculty">Faculty</option>
+                                </select>
+                            </div><br>
                             <select class="slct" name="year" required>
                                 <option value="" disabled selected>Year</option>
-                                <option value="yr1">1st Year</option>
-                                <option value="yr2">2nd Year</option>
-                                <option value="yr3">3rd Year</option>
-                                <option value="yr4">4th Year</option>
+                                <option value="1st Year">1st Year</option>
+                                <option value="2nd Year">2nd Year</option>
+                                <option value="3rd Year">3rd Year</option>
+                                <option value="4th Year">4th Year</option>
                             </select>
                             <select class="slct" name="dept" required>
                                 <option value="" disabled selected>Department</option>
@@ -171,7 +178,7 @@
                             </select>
                         </div><br>
 
-                        <input type="text" name="useridno" id="useridno"  placeholder= "Roll Number" required /><br><br>
+                        <input type="text" name="useridno" id="useridno"  placeholder= "User ID" required /><br><br>
 
                         <input type="text"  name="name" id="name"  placeholder= "Full Name" required/><br><br>
                         
