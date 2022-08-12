@@ -12,20 +12,19 @@
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
 
-
         <link href="/static/styling.css" rel="stylesheet">
 
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-        <title>Complaint Box {% block title %}{% endblock %} </title>
+        <title style="font-family: 'Brush Script MT', cursive">Student setu {% block title %}{% endblock %} </title>
         <link rel="shortcut icon" href="{{url_for('static', filename = 'logo.jpg' )}}">
 	</head>
 	<body >
 	
-		<nav class="navbar navbar-expand-md navbar-light bg-dark border">
+		<nav class="navbar navbar-expand-md navbar-light bg-dark border" width="100%">
 		
-            <a class="navbar-brand" href="/" ><font size="6" color="red"><b>Complaint box</b></font></a>
+            <a class="navbar-brand" href="/" ><b style="font-family: 'Trebuchet MS' ; font-size: 35px; color: aliceblue">Student setu</b></a>
 			
 			 <div class="logo mt-3 text">
 	        <!-- <a class="nav-item" href="/"><img src="static/logo.jpg" alt="sheep-logo" height="50px" width="50px">
@@ -42,8 +41,8 @@
 
                 {% if session.student %}
                 <ul class="navbar-nav ml-auto mt-2">
-                    <li class="nav-item"><a class="nav-link" href="/studentview">  <b>Dashboard</b></a></li>
-                    <li class="nav-item"><a class="nav-link" href="/logout"> <b>Log Out</b></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/studentview">  <b style="color: aliceblue">Dashboard</b></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/logout"> <b style="color: aliceblue">Log Out</b></a></li>
                 </ul>
             
                 <br>
@@ -51,7 +50,7 @@
 
                 {% elif session.faculty %}
                 <ul class="navbar-nav ml-auto mt-2">
-                    <li class="nav-item"><a class="nav-link" href="/logout"> <b>Log Out</b></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/logout"> <b style="color: aliceblue">Log Out</b></a></li>
                 </ul>
                 <br>
                 <br>
@@ -61,8 +60,8 @@
 
                 {% else %}
                     <ul class="navbar-nav ml-auto mt-2">
-                        <li class="nav-item"><a class="nav-link" href="/register"><b>Register</b></a></li>
-                        <li class="nav-item"><a class="nav-link" href="/login"> <b>Login</b></a></li>
+                        <li class="nav-item"><a class="nav-link" href="/register"><b style="color: aliceblue">Register</b></a></li>
+                        <li class="nav-item"><a class="nav-link" href="/login"> <b style="color: aliceblue">Login</b></a></li>
                  
                     </ul>
                     <br>

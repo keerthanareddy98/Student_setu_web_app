@@ -4,7 +4,7 @@ Username: BfCGjdLClZ
 
 Database name: BfCGjdLClZ
 
-Password: Ef57so3NSp
+Password: ht4lTbpV6q
 
 Server: remotemysql.com
 

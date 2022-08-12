@@ -25,7 +25,7 @@ app.secret_key = 'a'
 #DB details
 app.config['MYSQL_HOST'] = 'remotemysql.com'
 app.config['MYSQL_USER'] = 'BfCGjdLClZ'
-app.config['MYSQL_PASSWORD'] = "9SmhSof7W9"
+app.config['MYSQL_PASSWORD'] = "ht4lTbpV6q"
 app.config['MYSQL_DB'] = 'BfCGjdLClZ'
 mysql = MySQL(app)
 
@@ -615,4 +615,4 @@ def logout():
 
 
 if __name__ == '__main__':
-    app.run(debug = True,port = 8080)
+    app.run(host='0.0.0.0',debug = True,port = 8080)

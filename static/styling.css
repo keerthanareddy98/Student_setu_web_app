@@ -30,14 +30,7 @@ background-size: cover;
 	right:0;
 	margin:auto;
 }
-.container1 {
-    width: 550px;
-    background-color: white;
-    border: 1px solid #e5e5e5;
-    border-radius: 3px;
-    padding: 10px;
-    box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
-}
+
 
 .card{
 	width: 800px;
@@ -64,6 +57,108 @@ background-size: cover;
 }
 
 
+body {
+    font-family: 'Montserrat', sans-serif;
+    height: 100vh;
+}
+h3 {
+    text-align: center;
+    color: #413b3b;
+    text-transform: uppercase;
+    font-size: 30px;
+}
+
+h4 {
+    text-align: center;
+    color: #413b3b;
+    text-transform: uppercase;
+    font-size: 20px;
+}
+h5 {
+    text-align: center;
+    color: #82807f;
+    margin: 80px auto;
+    font-size: 20px;
+    width: 50%;
+    line-height: 1.7;
+}
+.box {
+    text-align: center;
+}
+
+.overlay1 {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.8);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+}
+.overlay1:target {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+
+.wrapper1 {
+    margin: 70px auto;
+    padding: 20px;
+    background: #e7e7e7;
+    border-radius: 5px;
+    width: 30%;
+    position: relative;
+    transition: all 5s ease-in-out;
+}
+.wrapper1 h2 {
+    margin-top: 0;
+    color: #333;
+}
+.wrapper1 .close1 {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    transition: all 200ms;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+}
+.wrapper1 .close1:hover {
+    color: #06D85F;
+}
+.wrapper1 .content1 {
+    max-height: 30%;
+    overflow: auto;
+}
+
+.container1 {
+    width: 550px;
+    background-color: white;
+    border: 1px solid #e5e5e5;
+    border-radius: 3px;
+    padding: 10px;
+    box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
+}
+
+form label {
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 3px;
+}
+input[type=text], select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+}
 
 .summary{
 	padding: 10px 10px;
@@ -140,131 +235,3 @@ div {
 
 
 
-
-
-
-/* 
-.toggle {
-	--width: 100px;
-	--height: calc(var(--width) / 3);
-
-	position: relative;
-	display: inline-block;
-	width: var(--width);
-	height: var(--height);
-	box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
-	border-radius: var(--height);
-	cursor: pointer;
-  }
-
-  .toggle input {
-	display: none;
-  }
-
-  .toggle .slider {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	border-radius: var(--height);
-	background-color: #ccc;
-	transition: all 0.4s ease-in-out;
-  }
-
-  .toggle .slider::before {
-	content: '';
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: calc(var(--height));
-	height: calc(var(--height));
-	border-radius: calc(var(--height) / 2);
-	background-color: #fff;
-	box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
-	transition: all 0.4s ease-in-out;
-  }
-
-  .toggle input:checked+.slider {
-	background-color: #2196F3;
-  }
-
-  .toggle input:checked+.slider::before {
-	transform: translateX(calc(var(--width) - var(--height)));
-  }
-
-
-
-
-
-
-
-
-
-  .mycontainer {
-	position:absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%,-50%);
-	}
-	.button{
-	background-color:#fff;
-	color:white;
-	font-weight: bolder;
-	color: #34495e;
-	text-transform:uppercase;
-	font-size:18px;
-	border-radius:5px;
-	box-shadow: 6px 6px 29px -4px rgba(0,0,0,0.75);
-	margin:35px;
-	padding:10px 15px ;
-	text-decoration:none;
-	transition:0.4s;
-	}
-	.button:hover{
-	background-color:#34495e;
-	color:white;
-	}
-	
-	
-	.popup{
-	background-color:rgba(0, 0, 0, 0.6);
-	width:100%;
-	height:100%;
-	position:absolute;top:0;
-	display:none;
-	justify-content:center;
-	align-items:center;
-	text-align:center;
-	}
-	.popup-content{
-	height:250px;
-	width:500px;
-	background:#fff;
-	padding:20px;
-	border-radius:5px;
-	position:relative;
-	
-	}
-	input{
-	margin:20px auto;
-	padding:8px;
-	width:50%;
-	border:1px solid gray;
-	display:block;
-	
-	}
-	
-	.close-button{
-	position:absolute;
-	width:20px;
-	height:20px;
-	border-radius:50%;
-	top:-15px;
-	right:-15px;
-	background:#fff;
-	cursor:pointer;
-	box-shadow:6px 6px 29px -4px rgba(0, 0, 0, 0.75);
-	
-	}
-	 */
