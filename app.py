@@ -314,19 +314,19 @@ def ignore(dt):
 
 
 #faculty giving reply for an idea
-#here http://127.0.0.1:8080/faculty_idea/idea_reply/1234/3 when i remove faculty_idea its working
+#here http://127.0.0.1:8080/faculty_idea/reply/1234/3 when i remove faculty_idea its working
 #the same is repeating with viewed and latest, if u manually remove faculty_idea and all its showing!!!!!
-@app.route('/idea_reply/<string:dt>/<string:si>', methods = ['GET'])
+@app.route('/reply/<string:dt>/<string:si>', methods = ['GET'])
 @login_required
-def idea_reply(dt,si):
+def reply(dt,si):
     global replyto
     global ideano
     ideano=si
     print("ideano issss:",dt,si)
     replyto=dt
     
-    return render_template("idea_reply.html")
-    #return redirect(url_for('idea_reply'))
+    return render_template("reply.html")
+    #return redirect(url_for('reply'))
 
 
 
@@ -340,7 +340,7 @@ def complaint_reply(dt,si):
     print("compno issss:",dt,si)
     replyto=dt
 
-    return render_template("idea_reply.html")
+    return render_template("reply.html")
     #return redirect(url_for('complaint_reply'))
 
 #faculty giving reply for a question
@@ -353,7 +353,7 @@ def complaint_reply(dt,si):
 #     print("qns issss:",dt,si)
 #     replyto=dt
 #     return ""
-#     # return render_template("idea_reply.html")
+#     # return render_template("reply.html")
 #     #return redirect(url_for('question_reply'))
 
 
