@@ -71,12 +71,12 @@ def register():
             flash("Passwords does not match")
         else:
             password=generate_password_hash(password)
-            TEXT = "Hello "+name + ",\n\n"+ """You are successfully registered""" 
-            TEXT+="{}\n\n".format("""Welcome..""")
-            message  = 'Subject: {}\n\n{}'.format("COMPLAINT BOX", TEXT)
+            TEXT = "Hello Welcome.."+name + ",\n\n"+ """You are successfully registered on STUDENT SETU""" 
+
+            # message  = 'Subject: {}\n\n{}'.format("STUDENT SETU", TEXT)
             x=sendgridmail(email,TEXT)
             if x==1: 
-                flash("You have successfully registered on COMPLAINT BOX")
+                flash("You have successfully registered on STUDENT SETU")
                 if(user=="Student"):
                     cursor.execute('INSERT INTO details VALUES (NULL, % s, % s, % s,% s, %s, %s, %s, %s)', ('Student', name, useridno, email, phone, dept, gender, password))
                 else:
@@ -147,11 +147,13 @@ def askquestion():
         qns = request.form['qns']
         cursor = mysql.connection.cursor()
         cursor.execute('SELECT * FROM details WHERE useridno = % s', (userid, ))
-        account = cursor.fetchone()  
-        print(account)
+        account = cursor.fetchone() 
+        name=account[2]
+        if(anony=="yes"):
+            name="Anonymous" 
         today=datetime.now()  
         an=1 if (anony=="yes") else 0
-        cursor.execute('INSERT INTO ciq_details VALUES (NULL, % s, % s, % s,% s, %s, %s, %s, %s, %s, 1)', (account[3], account[2], account[6], 'q', qns, "none", an, check, today))
+        cursor.execute('INSERT INTO ciq_details VALUES (NULL, % s, % s, % s,% s, %s, %s, %s, %s, %s, 1)', (account[3], name, account[6], 'q', qns, "none", an, check, today))
         mysql.connection.commit()
         flash("Question posted")
         return redirect("/studentmenu")
@@ -164,15 +166,18 @@ def complaint():
     if request.method == 'POST' :
         userid = session["user_id"]
         anony = request.form['anonymous']
+
         check = request.form.get("notify") != None
         comp = request.form['comp']
         cursor = mysql.connection.cursor()
         cursor.execute('SELECT * FROM details WHERE useridno = % s', (userid, ))
         account = cursor.fetchone()  
-        print(account)
+        name=account[2]
+        if(anony=="yes"):
+            name="Anonymous"
         today=datetime.now()  
         an=1 if (anony=="yes") else 0
-        cursor.execute('INSERT INTO ciq_details VALUES (NULL, % s, % s, % s,% s, %s, %s, %s, %s, %s, 1)', (account[3], account[2], account[6], 'c', comp, "none", an, check, today))
+        cursor.execute('INSERT INTO ciq_details VALUES (NULL, % s, % s, % s,% s, %s, %s, %s, %s, %s, 1)', (account[3], name, account[6], 'c', comp, "none", an, check, today))
         mysql.connection.commit()
         flash("Complaint generated")
         return redirect("/")
@@ -186,16 +191,19 @@ def idea():
     if request.method == 'POST' :
         userid = session["user_id"]
         anony = request.form['anonymous']
+        
         check = request.form.get("notify") != None
         idea = request.form['idea']
         benefit=request.form['benefit']
         cursor = mysql.connection.cursor()
         cursor.execute('SELECT * FROM details WHERE useridno = % s', (userid, ))
         account = cursor.fetchone()  
-        print(account)
+        name=account[2]
+        if(anony=="yes"):
+            name="Anonymous"
         today=datetime.now()  
         an=1 if (anony=="yes") else 0
-        cursor.execute('INSERT INTO ciq_details VALUES (NULL, % s, % s, % s,% s, %s, %s, %s, %s, %s, 1)', (account[3], account[2], account[6], 'i', idea, benefit, an, check, today))
+        cursor.execute('INSERT INTO ciq_details VALUES (NULL, % s, % s, % s,% s, %s, %s, %s, %s, %s, 1)', (account[3], name, account[6], 'i', idea, benefit, an, check, today))
         mysql.connection.commit()
         flash("Ideas is proposed")
         return redirect("/")
