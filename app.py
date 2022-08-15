@@ -48,7 +48,7 @@ def register():
         dept = request.form.get('dept')
         year=request.form['year']
         dept+=" "+year
-        gender= request.form.get('gender')
+        gender= request.form['gender']
         password = request.form['password']
         confirmPassword = request.form['confirmpassword']
         cursor = mysql.connection.cursor()
