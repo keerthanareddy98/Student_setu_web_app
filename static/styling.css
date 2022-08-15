@@ -213,6 +213,7 @@ div {
 
  label, h4, b,h1{
 	color: black;
+  font-family: Georgia;
  }
 
 .flex-container {

@@ -114,7 +114,6 @@ def login():
         cursor.execute('SELECT * FROM details WHERE useridno = % s', (useridno, ))
         account = cursor.fetchone() 
         if account and account[1]==user:
-            print(account)
             session['loggedin'] = True
             session['user_id'] = account[3]
             userid =  account[3]
@@ -151,11 +150,11 @@ def askquestion():
         name=account[2]
         if(anony=="yes"):
             name="Anonymous" 
-        today=datetime.now()  
+        today=datetime.now()
         an=1 if (anony=="yes") else 0
         cursor.execute('INSERT INTO ciq_details VALUES (NULL, % s, % s, % s,% s, %s, %s, %s, %s, %s, 1)', (account[3], name, account[6], 'q', qns, "none", an, check, today))
         mysql.connection.commit()
-        flash("Question posted")
+        flash("Your question is posted")
         return redirect("/studentmenu")
     return render_template("askquestion.html")
 
@@ -179,7 +178,7 @@ def complaint():
         an=1 if (anony=="yes") else 0
         cursor.execute('INSERT INTO ciq_details VALUES (NULL, % s, % s, % s,% s, %s, %s, %s, %s, %s, 1)', (account[3], name, account[6], 'c', comp, "none", an, check, today))
         mysql.connection.commit()
-        flash("Complaint generated")
+        flash("Your complaint is registered")
         return redirect("/")
     return render_template("complaint.html")
 
@@ -205,7 +204,7 @@ def idea():
         an=1 if (anony=="yes") else 0
         cursor.execute('INSERT INTO ciq_details VALUES (NULL, % s, % s, % s,% s, %s, %s, %s, %s, %s, 1)', (account[3], name, account[6], 'i', idea, benefit, an, check, today))
         mysql.connection.commit()
-        flash("Ideas is proposed")
+        flash("Your ideas is proposed")
         return redirect("/")
     return render_template("idea.html")
 
@@ -262,22 +261,20 @@ def sendotp():
     try:
         email=request.form["email"]
     except KeyError:
-        flash("Enter email address !")
+        flash("Enter email address!")
     if not (re.match(regex,email)):
         flash("Invalid email address !")
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM details WHERE email=%s", (email,))
     mysql.connection.commit()
     row=cur.fetchone()
-    print(row)
     if(row is None):
         flash("Invalid User..!")
-        print("noneeeeeeeeeeeeeeee")
     else:
         verifyotp=randint(1000, 9999)
         x=sendgridmail(email,str(verifyotp))
         if(x==1):
-            flash("OTP sent..!")
+            flash("OTP has been sent successfully..!")
         forgotten_user_email=row[4]
     
 
@@ -289,9 +286,8 @@ def sendotp():
 def verify():
     global verifyotp
     otp=request.form["otp"]
-    print(otp,verifyotp)
     if(otp==str(verifyotp)):
-        flash("OTP Verified..!")
+        flash("OTP has been Verified..!")
         return render_template("verify.html")
     return render_template("forgotpage.html")
     
@@ -306,14 +302,13 @@ def changepwd():
         mysql.connection.commit()
         flash("Password changed successfully")
         return render_template("login.html")
-    flash("Both password does not match")
+    flash("Passwords does not match")
     return render_template("verify.html")
     
 #deleting row from ideas table {[...This should also be implemented for questions and complaints as well...]}
 @app.route('/ignore/<string:dt>', methods = ['GET'])
 @login_required
 def ignore(dt):
-    print(dt)
     flash("Record Has Been Deleted Successfully")
     cur = mysql.connection.cursor()
     cur.execute("DELETE FROM ciq_details WHERE sno=%s", (dt,))
@@ -321,18 +316,14 @@ def ignore(dt):
     return redirect(url_for('facultymenu'))
 
 
-#faculty giving reply for an idea
-#here http://127.0.0.1:8080/faculty_idea/reply/1234/3 when i remove faculty_idea its working
-#the same is repeating with viewed and latest, if u manually remove faculty_idea and all its showing!!!!!
+#faculty giving reply for ideas complaints and queries
 @app.route('/reply/<string:dt>/<string:si>', methods = ['GET'])
 @login_required
 def reply(dt,si):
     global replyto
     global ideano
     ideano=si
-    print("ideano issss:",dt,si)
     replyto=dt
-    
     return render_template("reply.html")
     #return redirect(url_for('reply'))
 
@@ -345,24 +336,9 @@ def complaint_reply(dt,si):
     global replyto
     global ideano
     ideano=si
-    print("compno issss:",dt,si)
     replyto=dt
-
     return render_template("reply.html")
-    #return redirect(url_for('complaint_reply'))
 
-#faculty giving reply for a question
-# @app.route('/question_reply/<string:dt>/<string:si>', methods = ['GET'])
-# @login_required
-# def question_reply(dt,si):
-#     global replyto
-#     global ideano
-#     ideano=si
-#     print("qns issss:",dt,si)
-#     replyto=dt
-#     return ""
-#     # return render_template("reply.html")
-#     #return redirect(url_for('question_reply'))
 
 
 #faculty giving reply for an idea
@@ -371,7 +347,6 @@ def complaint_reply(dt,si):
 def replysent(replyto,ideano):
     if request.method == 'POST' :
         answer= request.form["answer"]
-        print(replyto,ideano)
         cur = mysql.connection.cursor()
         cur.execute("SELECT name from details WHERE useridno=%s",(session['user_id'],))
         name=cur.fetchone()
@@ -379,79 +354,55 @@ def replysent(replyto,ideano):
         email=cur.fetchone()
         cur.execute("SELECT statement from ciq_details WHERE sno=%s",(ideano,))
         idea=cur.fetchone()
-        print(idea)
         n=cur.execute("SELECT notify from ciq_details WHERE sno=%s",(ideano,))
-        up=cur.execute("UPDATE ciq_details SET status=%s WHERE sno=%s ", (0,ideano,))
-        print("keerthana : ",session['user_id'],answer)
-        #tobeupdated=str([idea[0],name,answer])
-        print(idea,name)
+        cur.execute("UPDATE ciq_details SET status=%s WHERE sno=%s ", (0,ideano,))
+
         cur.execute("SELECT ciq_flag from ciq_details WHERE sno=%s",(ideano,))
         flag=cur.fetchone()[0]
-        print(flag)
         tobeupdated=idea[0]+"#$&$#"+name[0]+"#$&$#"+answer
-        up=cur.execute("UPDATE ciq_details SET statement=%s WHERE sno=%s ", (tobeupdated,ideano,))
+        cur.execute("UPDATE ciq_details SET statement=%s WHERE sno=%s ", (tobeupdated,ideano,))
         if n:
-            message="You have been received your response \n For the query: "+ idea[0] +"\n \n" + answer
+            message="You have been received your response for:\n"+ idea[0] 
             sendgridmail(email,message)
         mysql.connection.commit()
-        print(up)
         flash("Reply has been sent Successfully")
         if(flag=='i'):
-            #return render_template("faculty_idea.html")
             return redirect(url_for('faculty_idea'))
         elif(flag=='q'):
             return redirect(url_for('faculty_question'))
-            # return render_template("faculty_question.html")
         else:
             return redirect(url_for('faculty_complaint'))
-            # return render_template("faculty_complaint.html")
 
 #faculty giving reply for an idea
 @app.route('/editsentreply/<string:replyto>/<string:ideano>', methods =['GET', 'POST'])
 @login_required
 def editsentreply(replyto,ideano):
     if request.method == 'POST' :
-        print(replyto,ideano)
         answer= request.form["answer"]
-
         cur = mysql.connection.cursor()
-        # cur.execute("SELECT name from details WHERE useridno=%s",(session['user_id'],))
-        # name=cur.fetchone()
-        # cur.execute("SELECT email from details WHERE useridno=%s",(replyto,))
-        # email=cur.fetchone()
+        cur.execute("SELECT email from details WHERE useridno=%s",(replyto,))
+        email=cur.fetchone()
         cur.execute("SELECT statement from ciq_details WHERE sno=%s",(ideano,))
         idea=list(cur.fetchone())
         idea=idea[0].split("#$&$#")
-        # print(idea)
         idea[2]=answer
         tobeupdated='#$&$#'.join(idea)
-        # print(tobeupdated)
         n=cur.execute("SELECT notify from ciq_details WHERE sno=%s",(ideano,))
-        up=cur.execute("UPDATE ciq_details SET status=%s WHERE sno=%s ", (0,ideano,))
-        # print(" kkkkk: ",session['user_id'],answer)
-        #tobeupdated=str([idea[0],name,answer])
-        # print(idea,name)
+        cur.execute("UPDATE ciq_details SET status=%s WHERE sno=%s ", (0,ideano,))
         cur.execute("SELECT ciq_flag from ciq_details WHERE sno=%s",(ideano,))
         flag=cur.fetchone()[0]
-        # print(flag)
-        # tobeupdated=idea[0]+"#$&$#"+name[0]+"#$&$#"+answer
-
-        up=cur.execute("UPDATE ciq_details SET statement=%s WHERE sno=%s ", (tobeupdated,ideano,))
-        # if n:
-        #     message="You have been received your response \n For the query: "+ idea[0] +"\n \n" + answer
-        #     sendgridmail(email,message)
+        cur.execute("UPDATE ciq_details SET statement=%s WHERE sno=%s ", (tobeupdated,ideano,))
+        if n:
+            message="You have been received your response for:\n"+ idea[0]
+            sendgridmail(email,message)
         mysql.connection.commit()
-        # print(up)
         flash("Reply has been edited Successfully")
         if(flag=='i'):
-            #return render_template("faculty_idea.html")
             return redirect(url_for('faculty_idea'))
         elif(flag=='q'):
             return redirect(url_for('faculty_question'))
-            # return render_template("faculty_question.html")
         else:
             return redirect(url_for('faculty_complaint'))
-            # return render_template("faculty_complaint.html")
 
 
 #retrieving latest rows from ideas table {[...This should also be implemented for questions and complaints as well...]}
@@ -510,7 +461,6 @@ def viewedi():
         row=list(row)
         row[5]=row[5].split("#$&$#")
         rows1.append(row)
-    print(rows1)
     return render_template("faculty_idea.html", records = rows1)
 
 
@@ -531,7 +481,6 @@ def viewedq():
         row=list(row)
         row[5]=row[5].split("#$&$#")
         rows1.append(row)
-    print(rows1)
     return render_template("faculty_question.html", records = rows1)
 
 
@@ -552,7 +501,6 @@ def viewedc():
         row=list(row)
         row[5]=row[5].split("#$&$#")
         rows1.append(row)
-    print(rows1)
     return render_template("faculty_complaint.html", records = rows1)
 
 #retrieving studentview rows from ideas, questions and complaints tables 
@@ -560,19 +508,13 @@ def viewedc():
 @login_required   
 def studentview():
     cur = mysql.connection.cursor()
-    print(session['user_id'])
     cur.execute("SELECT statement FROM ciq_details WHERE studentid = %s AND status= %s", (session['user_id'],0,))
     statements=cur.fetchall()
     mylist=[]
     for statement in statements:
         for i in statement:
-            print(mylist.append(i.split("#$&$#")))
-    print(mylist)
-    print(type(mylist))
-    # cur.execute("SELECT statement FROM ciq_details WHERE studentid = %s AND status= %s", (session['user_id'],1,))
-    # statements.extend(cur.fetchall())
-    # cur.execute("SELECT statement FROM ciq_details WHERE studentid = %s AND status= %s", (session['user_id'],1,))
-    # statements.extend(cur.fetchall())
+            mylist.append(i.split("#$&$#"))
+
     mysql.connection.commit()   
     return render_template("studentview.html", records=mylist)
 
@@ -582,15 +524,12 @@ def studentview():
 @login_required   
 def responded():
     cur = mysql.connection.cursor()
-    print(session['user_id'])
     cur.execute("SELECT statement FROM ciq_details WHERE studentid = %s AND status= %s", (session['user_id'],0,))
     statements=cur.fetchall()
     mylist=[]
     for statement in statements:
         for i in statement:
-            print(mylist.append(i.split("#$&$#")))
-    print(mylist)
-    print(type(mylist))
+            mylist.append(i.split("#$&$#"))
     mysql.connection.commit()   
     return render_template("studentview.html", records=mylist)
 
@@ -601,15 +540,12 @@ def responded():
 @login_required   
 def yettorespond():
     cur = mysql.connection.cursor()
-    print(session['user_id'])
     cur.execute("SELECT statement FROM ciq_details WHERE studentid = %s AND status= %s", (session['user_id'],1,))
     statements=cur.fetchall()
     mylist=[]
     for statement in statements:
         for i in statement:
-            print(mylist.append(i.split("#$&$#")))
-    print(mylist)
-    print(type(mylist))
+            mylist.append(i.split("#$&$#"))
     mysql.connection.commit()   
     return render_template("studentview.html", records=mylist)
 
