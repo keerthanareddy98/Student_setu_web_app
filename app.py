@@ -148,11 +148,15 @@ def askquestion():
         cursor.execute('SELECT * FROM details WHERE useridno = % s', (userid, ))
         account = cursor.fetchone() 
         name=account[2]
+        uid=account[3]
+        yr=account[6]
         if(anony=="yes"):
             name="Anonymous" 
+            uid="*******"
+            yr="-"
         today=datetime.now()
         an=1 if (anony=="yes") else 0
-        cursor.execute('INSERT INTO ciq_details VALUES (NULL, % s, % s, % s,% s, %s, %s, %s, %s, %s, 1)', (account[3], name, account[6], 'q', qns, "none", an, check, today))
+        cursor.execute('INSERT INTO ciq_details VALUES (NULL, % s, % s, % s,% s, %s, %s, %s, %s, %s, 1)', (uid, name, yr, 'q', qns, "none", an, check, today))
         mysql.connection.commit()
         flash("Your question is posted")
         return redirect("/studentmenu")
@@ -165,18 +169,21 @@ def complaint():
     if request.method == 'POST' :
         userid = session["user_id"]
         anony = request.form['anonymous']
-
         check = request.form.get("notify") != None
         comp = request.form['comp']
         cursor = mysql.connection.cursor()
         cursor.execute('SELECT * FROM details WHERE useridno = % s', (userid, ))
         account = cursor.fetchone()  
+        uid=account[3]
         name=account[2]
+        yr=account[6]
         if(anony=="yes"):
             name="Anonymous"
+            uid="*******"
+            yr="-"
         today=datetime.now()  
         an=1 if (anony=="yes") else 0
-        cursor.execute('INSERT INTO ciq_details VALUES (NULL, % s, % s, % s,% s, %s, %s, %s, %s, %s, 1)', (account[3], name, account[6], 'c', comp, "none", an, check, today))
+        cursor.execute('INSERT INTO ciq_details VALUES (NULL, % s, % s, % s,% s, %s, %s, %s, %s, %s, 1)', (uid, name, yr, 'c', comp, "none", an, check, today))
         mysql.connection.commit()
         flash("Your complaint is registered")
         return redirect("/")
@@ -198,11 +205,15 @@ def idea():
         cursor.execute('SELECT * FROM details WHERE useridno = % s', (userid, ))
         account = cursor.fetchone()  
         name=account[2]
+        uid=account[3]
+        yr=account[6]
         if(anony=="yes"):
             name="Anonymous"
+            uid="*******"
+            yr="-"   
         today=datetime.now()  
         an=1 if (anony=="yes") else 0
-        cursor.execute('INSERT INTO ciq_details VALUES (NULL, % s, % s, % s,% s, %s, %s, %s, %s, %s, 1)', (account[3], name, account[6], 'i', idea, benefit, an, check, today))
+        cursor.execute('INSERT INTO ciq_details VALUES (NULL, % s, % s, % s,% s, %s, %s, %s, %s, %s, 1)', (uid, name, yr, 'i', idea, benefit, an, check, today))
         mysql.connection.commit()
         flash("Your ideas is proposed")
         return redirect("/")
