@@ -11,15 +11,12 @@
     <h6 style="display:inline-block"> <a href="responded" class="btn btn-light btn-block" type="submit" width="15px">Responded</a></h6>
 	<h6 style="display:inline-block"><a href="yettorespond" class="btn btn-dark btn-block" type="submit" width="15px">Yet to Respond</a></h6>
   </center>  </div> 
-
 <div > 
 	<center> 
 				{% for record in records %}
 				<div class="card">
 							<p>{{record[0]}}</p>
-
 							<b style="text-align: left">{{record[1]}}</b>
-
 							<p style="text-align: left">{{record[2]}}</p>
 						
 				</div>

@@ -384,7 +384,7 @@ def replysent(replyto,ideano):
         else:
             return redirect(url_for('faculty_complaint'))
 
-#faculty giving reply for an idea
+#faculty giving reply for an idea, complaint and question
 @app.route('/editsentreply/<string:replyto>/<string:ideano>', methods =['GET', 'POST'])
 @login_required
 def editsentreply(replyto,ideano):
@@ -427,7 +427,6 @@ def latesti():
     mysql.connection.commit()
     rows=cur.fetchall()
     return render_template("faculty_idea.html", records = rows)
-
 
 
 #retrieving latest rows from qns table {[...This should also be implemented for questions and complaints as well...]}
