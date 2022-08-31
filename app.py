@@ -22,11 +22,11 @@ app.secret_key = 'a'
 #app.config['MYSQL_DB'] = "users"
 
 
-#DB details
+#DB details will be provided by remotemysql.com
 app.config['MYSQL_HOST'] = 'remotemysql.com'
-app.config['MYSQL_USER'] = 'BfCGjdLClZ'
-app.config['MYSQL_PASSWORD'] = "ht4lTbpV6q"
-app.config['MYSQL_DB'] = 'BfCGjdLClZ'
+app.config['MYSQL_USER'] = '*'
+app.config['MYSQL_PASSWORD'] = "*"
+app.config['MYSQL_DB'] = '*'
 mysql = MySQL(app)
 
 #main page(root)
@@ -73,7 +73,6 @@ def register():
             password=generate_password_hash(password)
             TEXT = "Hello Welcome.."+name + ",\n\n"+ """You are successfully registered on STUDENT SETU""" 
 
-            # message  = 'Subject: {}\n\n{}'.format("STUDENT SETU", TEXT)
             x=sendgridmail(email,TEXT)
             if x==1: 
                 flash("You have successfully registered on STUDENT SETU")
